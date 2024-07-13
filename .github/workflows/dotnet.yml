@@ -1,5 +1,5 @@
 name: Build and Test
-
+#für jeden Push und pull request auf main 
 on:
   push:
     branches:
@@ -11,21 +11,21 @@ on:
 jobs:
   build:
     runs-on: windows-latest
-
+# checkout 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
-
+      uses: actions/checkout@v4
+ # .NET Setup 
     - name: Setup .NET
       uses: actions/setup-dotnet@v4.0.1
       with:
-        dotnet-version: '8.0.x' # Verwende die neueste Version von .NET
-
+        dotnet-version: '8.0.x'
+# Restore
     - name: Restore dependencies
       run: dotnet restore
-
+# Build
     - name: Build
-      run: dotnet build --configuration Release --no-restore
-
+      run: dotnet build --no-restore
+# Testen
     - name: Run tests
       run: dotnet test --no-restore --verbosity normal
